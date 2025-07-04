@@ -3,7 +3,37 @@ const catchAsync = require("../../../utils/catchAsync");
 
 exports.createCompany = catchAsync(async (req, res) => {
     try {
-        const { name, sign, tagline, gst_no, pan, email, contactNumbers, address, city, state, website, accountHolderName, bankName, accountNo, ifscCode, branch, upiIds = [] } = req.body;
+        const {
+            name,
+            tagline,
+            gstNo,
+            pan,
+            email,
+            whatsappNumber,
+            contactNumber1,
+            contactNumber2,
+            contactNumber3,
+            contactNumber4,
+            landlineNumber,
+            tollFreeNumber,
+            address,
+            city,
+            state,
+            jurisdiction,
+            website,
+            accountHolderName,
+            bankName,
+            accountNo,
+            ifscCode,
+            branch,
+            upiId1,
+            upiId2,
+            phonePeNumber,
+            googlePayNumber,
+            affiliatedBy,
+            isoCertificateDetails,
+            govtRegNo
+        } = req.body;
 
         const userId = req.user._id;
         if (!userId) {
@@ -15,22 +45,46 @@ exports.createCompany = catchAsync(async (req, res) => {
 
         // Optional: handle file uploads (if using multer)
         const logo = req.files?.logo?.[0]?.path || "";
-        const signFile = req.files?.sign?.[0]?.path || sign || "";
-
-        // Optional: contactNumbers may come as comma separated string
-        const contacts = Array.isArray(contactNumbers)
-            ? contactNumbers
-            : (contactNumbers || "").split(",").map(c => c.trim()).filter(Boolean);
+        const sign = req.files?.sign?.[0]?.path || "";
 
         const newCompany = new Company({
-            userId: userId, name, logo, sign: signFile, tagline, gst_no, pan, email, contactNumbers: contacts, address, city, state, website,
+            userId,
+            name,
+            logo,
+            sign,
+            tagline,
+            gstNo,
+            pan,
+            email,
+            whatsappNumber,
+            contactNumber1,
+            contactNumber2,
+            contactNumber3,
+            contactNumber4,
+            landlineNumber,
+            tollFreeNumber,
+            address,
+            city,
+            state,
+            jurisdiction,
+            website,
             bankDetails: {
                 accountHolderName,
                 bankName,
                 accountNo,
                 ifscCode,
                 branch,
-                upiIds: Array.isArray(upiIds) ? upiIds : [upiIds]
+            },
+            upiDetails: {
+                upiId1,
+                upiId2,
+                phonePeNumber,
+                googlePayNumber
+            },
+            otherDetails: {
+                affiliatedBy,
+                isoCertificateDetails,
+                govtRegNo
             }
         });
 

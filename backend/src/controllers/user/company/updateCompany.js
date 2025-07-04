@@ -11,47 +11,83 @@ exports.updateCompany = catchAsync(async (req, res) => {
             });
         }
 
-        const { name, sign, tagline, gst_no, pan, email, contactNumbers, address, city, state, website, accountHolderName, bankName, accountNo, ifscCode, branch, upiIds } = req.body;
+        const {
+            name,
+            sign,
+            tagline,
+            gstNo,
+            pan,
+            email,
+            whatsappNumber,
+            contactNumber1,
+            contactNumber2,
+            contactNumber3,
+            contactNumber4,
+            landlineNumber,
+            tollFreeNumber,
+            address,
+            city,
+            state,
+            jurisdiction,
+            website,
+            accountHolderName,
+            bankName,
+            accountNo,
+            ifscCode,
+            branch,
+            upiId1,
+            upiId2,
+            phonePeNumber,
+            googlePayNumber,
+            affiliatedBy,
+            isoCertificateDetails,
+            govtRegNo
+        } = req.body;
 
-        // File upload paths
         const logo = req.files?.logo?.[0]?.path;
         const signFile = req.files?.sign?.[0]?.path;
 
-        // Parse arrays
-        const contacts = Array.isArray(contactNumbers)
-            ? contactNumbers
-            : (contactNumbers || "").split(",").map(c => c.trim()).filter(Boolean);
-
-        const upiArray = Array.isArray(upiIds)
-            ? upiIds
-            : (upiIds || "").split(",").map(u => u.trim()).filter(Boolean);
-
-        // Prepare update object
         const updateData = {
             ...(name && { name }),
             ...(logo && { logo }),
             ...(signFile && { sign: signFile }),
             ...(sign && !signFile && { sign }),
             ...(tagline && { tagline }),
-            ...(gst_no && { gst_no }),
+            ...(gstNo && { gstNo }),
             ...(pan && { pan }),
             ...(email && { email }),
+            ...(whatsappNumber && { whatsappNumber }),
+            ...(contactNumber1 && { contactNumber1 }),
+            ...(contactNumber2 && { contactNumber2 }),
+            ...(contactNumber3 && { contactNumber3 }),
+            ...(contactNumber4 && { contactNumber4 }),
+            ...(landlineNumber && { landlineNumber }),
+            ...(tollFreeNumber && { tollFreeNumber }),
             ...(address && { address }),
             ...(city && { city }),
             ...(state && { state }),
+            ...(jurisdiction && { jurisdiction }),
             ...(website && { website }),
-            ...(contacts.length > 0 && { contact_numbers: contacts }),
-            bank_details: {
-                ...(accountHolderName && { account_holder_name: accountHolderName }),
-                ...(bankName && { bank_name: bankName }),
-                ...(accountNo && { account_no: accountNo }),
-                ...(ifscCode && { ifsc_code: ifscCode }),
-                ...(branch && { branch }),
-                ...(upiArray.length > 0 && { upi_ids: upiArray })
+            bankDetails: {
+                ...(accountHolderName && { accountHolderName }),
+                ...(bankName && { bankName }),
+                ...(accountNo && { accountNo }),
+                ...(ifscCode && { ifscCode }),
+                ...(branch && { branch })
+            },
+            upiDetails: {
+                ...(upiId1 && { upiId1 }),
+                ...(upiId2 && { upiId2 }),
+                ...(phonePeNumber && { phonePeNumber }),
+                ...(googlePayNumber && { googlePayNumber })
+            },
+            otherDetails: {
+                ...(affiliatedBy && { affiliatedBy }),
+                ...(isoCertificateDetails && { isoCertificateDetails }),
+                ...(govtRegNo && { govtRegNo })
             }
         };
 
-        // Update the company for the user
         const updatedCompany = await Company.findOneAndUpdate(
             { userId },
             { $set: updateData },

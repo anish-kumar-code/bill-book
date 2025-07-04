@@ -102,9 +102,9 @@ router.get('/bill', userAuthenticate, getBill);
 router.post('/bill', userAuthenticate, createBill);
 
 
-//------------------------------------------------
-// money Data
 //-----------------------------------------------
+// money Data
+//------------------------------------------------
 router.get('/money', userAuthenticate, getMoney);
 router.post('/money', userAuthenticate, createMoney);
 

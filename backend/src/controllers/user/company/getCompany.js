@@ -4,8 +4,7 @@ const catchAsync = require("../../../utils/catchAsync");
 
 exports.getCompany = catchAsync(async (req, res) => {
     try {
-        const userId = req.user._id; // assuming user is authenticated
-
+        const userId = req.user._id; 
         if (!userId) {
             return res.status(400).json({
                 status: false,
