@@ -4,7 +4,7 @@ exports.deleteUser = async (req, res) => {
     try {
         console.log("Deleting user with ID:", req.params.id);
 
-        await User.findByIdAndDelete(req.params.id);
+        // await User.findByIdAndDelete(req.params.id);
 
         res.send(`
       <!DOCTYPE html>
@@ -13,7 +13,7 @@ exports.deleteUser = async (req, res) => {
           <title>Account Deleted</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <style>
-              body {
+              body { 
                   margin: 0;
                   padding: 0;
                   font-family: Arial, sans-serif;
@@ -59,20 +59,3 @@ exports.deleteUser = async (req, res) => {
         res.status(500).send("Error deleting user.");
     }
 };
-
-
-// const User = require("../../../models/user");
-
-// exports.deleteUser = async (req, res) => {
-//     try {
-//         console.log("Deleting user with ID:", req.params.id);
-//         // await User.findByIdAndDelete(req.params.id);
-//         // res.status(200).send("User deleted successfully.");
-//         res.status(200).json({
-//             status: true,
-//             message: "User deleted successfully.",
-//         });
-//     } catch (error) {
-//         res.status(500).send("Error deleting user.");
-//     }
-// };
