@@ -12,6 +12,9 @@ const { updateSetting } = require('../controllers/admin/setting/updateSetting');
 const { updateLogo } = require('../controllers/admin/setting/updateLogo');
 const { updateFavicon } = require('../controllers/admin/setting/updateFavicon');
 const { updateSettingCard } = require('../controllers/admin/setting/updateSettingCard');
+const { getDashboard } = require('../controllers/admin/dashboard/getDashboard');
+const { getList } = require('../controllers/admin/list/getList');
+const { updateUser } = require('../controllers/admin/user/updateUser');
 
 const router = express.Router();
 
@@ -25,12 +28,35 @@ router.get("/test", (req, res) => {
 router.post('/signup', signup)
 router.post('/login', login)
 
+
+//------------------------------------------------
+// dashboard
+//------------------------------------------------
+router.get("/dashboard", getDashboard)
+
+
+//------------------------------------------------
+// list
+//------------------------------------------------
+router.get("/list", getList)
+
+
+
+//------------------------------------------------
+// user
+//------------------------------------------------
+router.patch("/user/:userId", updateUser)
+
+
+
 //------------------------------------------------
 // cms
 //------------------------------------------------
 router.get("/cms", adminAuthenticate, getCms)
 router.post("/cms", adminAuthenticate, addCms)
 router.patch("/cms/:id", adminAuthenticate, updateCms)
+
+
 
 //------------------------------------------------
 // setting
