@@ -1,9 +1,10 @@
 import { Card, List, Avatar, Tag } from 'antd';
+import { FaUser } from 'react-icons/fa';
 
 // Status color mapping
 const statusColors = {
-    Accepted: { color: '#52c41a', bg: '#f6ffed', border: '#b7eb8f' },
-    Sent: { color: '#1890ff', bg: '#f0f5ff', border: '#adc6ff' },
+    active: { color: '#52c41a', bg: '#f6ffed', border: '#b7eb8f' },
+    inactive: { color: '#1890ff', bg: '#f0f5ff', border: '#adc6ff' },
     Expired: { color: '#faad14', bg: '#fffbe6', border: '#ffe58f' },
     Declined: { color: '#ff4d4f', bg: '#fff1f0', border: '#ffa39e' },
 };
@@ -56,7 +57,7 @@ function NewUserList({ data, loading }) {
                             <List.Item.Meta
                                 avatar={
                                     <Avatar
-                                        src={item.avatar}
+                                    icon={<FaUser />}
                                         style={{ width: 48, height: 48, marginRight: 16 }}
                                     />
                                 }
@@ -67,14 +68,14 @@ function NewUserList({ data, loading }) {
                                 }
                                 description={
                                     <span style={{ color: '#757575', fontSize: 15 }}>
-                                        {item.quotationId}
+                                        {item.email}
                                     </span>
                                 }
                             />
                             <div style={{ textAlign: 'right', minWidth: 120 }}>
                                 <StatusTag status={item.status} />
                                 <div style={{ marginTop: 6, color: '#757575', fontSize: 15 }}>
-                                    {item.date}
+                                    {item.mobileNo}
                                 </div>
                             </div>
                         </List.Item>

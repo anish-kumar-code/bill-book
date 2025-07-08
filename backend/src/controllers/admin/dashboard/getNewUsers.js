@@ -80,12 +80,7 @@ exports.getNewUsers = catchAsync(async (req, res) => {
         const today = new Date();
         const thirtyDaysAgo = new Date(today);
         thirtyDaysAgo.setDate(today.getDate() - 30);
-        const newUsers = await User.find({
-            createdAt: {
-                $gte: thirtyDaysAgo,
-                $lte: today
-            }
-        })
+        const newUsers = await User.find({ createdAt: { $gte: thirtyDaysAgo, $lte: today } }).limit(15)
         // console.log(abc.length)
 
         // Filter users for the last 7 days
