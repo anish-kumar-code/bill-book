@@ -15,6 +15,13 @@ const { updateSettingCard } = require('../controllers/admin/setting/updateSettin
 const { getDashboard } = require('../controllers/admin/dashboard/getDashboard');
 const { getList } = require('../controllers/admin/list/getList');
 const { updateUser } = require('../controllers/admin/user/updateUser');
+const { getRecentTransactions } = require('../controllers/admin/dashboard/getRecentTransactions');
+const { getNewUsers } = require('../controllers/admin/dashboard/getNewUsers');
+const { createSubscriptionPlan } = require('../controllers/admin/subscriptionPlan/createSubscriptionPlan');
+const { getSubscriptionPlan } = require('../controllers/admin/subscriptionPlan/getSubscriptionPlan');
+const { updateSubscriptionPlan } = require('../controllers/admin/subscriptionPlan/updateSubscriptionPlan');
+const { deleteSubscriptionPlan } = require('../controllers/admin/subscriptionPlan/deleteSubscriptionPlan');
+const { getUser } = require('../controllers/admin/user/getUser');
 
 const router = express.Router();
 
@@ -33,6 +40,8 @@ router.post('/login', login)
 // dashboard
 //------------------------------------------------
 router.get("/dashboard", getDashboard)
+router.get("/recent-transactions", getRecentTransactions)
+router.get("/new-users", getNewUsers)
 
 
 //------------------------------------------------
@@ -45,7 +54,18 @@ router.get("/list", getList)
 //------------------------------------------------
 // user
 //------------------------------------------------
+router.get("/user/list", getUser)
 router.patch("/user/:userId", updateUser)
+
+
+
+//------------------------------------------------
+// subscription plan
+//------------------------------------------------
+router.post("/subscription-plan", createSubscriptionPlan)
+router.get("/subscription-plan", getSubscriptionPlan)
+router.patch("/subscription-plan/:id", updateSubscriptionPlan)
+router.delete("/subscription-plan/:id", deleteSubscriptionPlan)
 
 
 

@@ -2,43 +2,38 @@ const catchAsync = require("../../../utils/catchAsync");
 
 exports.getDashboard = catchAsync(async (req, res) => {
     try {
-        // Mock database queries - replace with actual model calls
-        const quotationCount = 25;
-        const surveyCount = 15;
-        const packingCount = 30;
-        const lrCount = 20;
-        const billCount = 35;
-        const moneyCount = 40;
-        const carCount = 10;
-        const paymentCount = 28;
-        const voucherCount = 18;
-        const formCount = 22;
-        const receiptCount = 15;
-        const conditionCount = 12;
-        const invoiceCount = 27;
-        const proformaCount = 19;
-        const listCount = 33;
+
+        const dashboardData = {
+            overview: {
+                today: 1500,
+                week: 10450,
+                month: 45000,
+                year: 180000
+            },
+            salesGraph: {
+                "sales": [
+                    200,
+                    450,
+                    700,
+                    300,
+                    600,
+                    800,
+                    900
+                ]
+            },
+            userStatus: {
+                active: 120,
+                inactive: 30,
+                paid: 90,
+                unpaid: 60,
+                newUsers: 15
+            }
+        };
 
         return res.status(200).json({
             status: true,
             message: "Dashboard data fetched successfully",
-            data: {
-                quotationCount,
-                surveyCount,
-                packingCount,
-                lrCount,
-                billCount,
-                moneyCount,
-                carCount,
-                paymentCount,
-                voucherCount,
-                formCount,
-                receiptCount,
-                conditionCount,
-                invoiceCount,
-                proformaCount,
-                listCount
-            }
+            data: dashboardData
         });
 
     } catch (error) {

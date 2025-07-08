@@ -33,8 +33,8 @@ export default function Header({ data, loading }) {
                 transition={{ duration: 0.5 }}
             >
                 {/* Logo */}
-                <Link to="/" className="flex items-center gap-2 group">
-                    {loading ? <Spin size='small'/> : <img src={`${BASE_URL}/${data.logo}`} alt="logo" height={50} width={50} className="rounded" loading="lazy" />}
+                <Link to="#" className="flex items-center gap-2 group">
+                    {loading ? <Spin size='small'/> : <img src={`${BASE_URL}/${data?.logo}`} alt="logo" height={50} width={50} className="rounded" loading="lazy" />}
                     <span className="text-xl font-bold text-green-600 group-hover:text-green-700 transition-colors">
                         GoRabbit
                     </span>

@@ -16,12 +16,11 @@ import PrivacyPolicyPage from './pages/admin/Settings/components/PrivacyPolicyPa
 import RefundPolicy from './pages/admin/Settings/components/RefundPolicy'
 import AboutUs from './pages/admin/Settings/components/AboutUs'
 import Cms from './pages/web/Cms/Cms'
-import College from './pages/admin/College/College'
-import Enquiry from './pages/admin/Enquiry/Enquiry'
-import EditCollegeForm from './pages/admin/College/components/EditCollegeForm'
 import User from './pages/admin/User/User'
+import SubscriptionPlan from './pages/admin/Subscription-plan/SubscriptionPlan'
 
 function App() {
+
   return (
     <>
       <Routes>
@@ -32,10 +31,8 @@ function App() {
         <Route path='/admin/login' element={<Login />} />
         <Route path='/admin' element={<AdminPrivateRoute> <AdminLayout /> </AdminPrivateRoute>}>
           <Route index element={<Dashboard />} />
+          <Route path='subscription-plan' element={<SubscriptionPlan />} />
           <Route path='user' element={<User />} />
-          <Route path='enquiry' element={<Enquiry />} />
-          <Route path='college' element={<College />} />
-          <Route path='college/:id' element={<EditCollegeForm />} />
           <Route path='settings' element={<Settings />} />
           {/* <Route path='settings/profile' element={<Profile />} /> */}
           <Route path='settings/charges' element={<Charges />} />

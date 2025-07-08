@@ -24,16 +24,10 @@ router.get("/test", (req, res) => {
   res.status(200).json({ message: "this is test route" });
 });
 
+
 app.use(router);
 
 appRoutes(app);
-
-//not exist route handle here
-// app.all("*", (req, res, next) => {
-//   return next(
-//     new AppError(`The route ${req.originalUrl} not run on this server.`, 404)
-//   );
-// });
 
 app.use(globalErrorHandler);
 module.exports = app;

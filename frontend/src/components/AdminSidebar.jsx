@@ -5,8 +5,8 @@ const { Sider } = Layout
 import { useNavigate, useLocation } from 'react-router'
 
 import { LuLayoutDashboard } from "react-icons/lu"
-import { MdMessage } from 'react-icons/md'
-import { FaSchool, FaSitemap, FaUserClock } from 'react-icons/fa'
+import { MdMessage, MdOutlineSubscriptions } from 'react-icons/md'
+import { FaRegUser, FaSchool, FaSitemap, FaUserClock } from 'react-icons/fa'
 import { FaArrowRightToBracket } from 'react-icons/fa6'
 import { useAuth } from '../context/AuthContext'
 import { IoSettingsOutline } from 'react-icons/io5'
@@ -34,7 +34,8 @@ const AdminSidebar = ({ collapsed, settingData }) => {
     const menuItems = [
         { type: 'divider' },
         { key: 'dashboard', icon: <LuLayoutDashboard size={18} />, label: 'Dashboard', onClick: () => navigate('/admin') },
-        { key: 'user', icon: <MdMessage size={18} />, label: 'User', onClick: () => navigate('/admin/user') },
+        { key: 'subscription-plan', icon: <MdOutlineSubscriptions size={18} />, label: 'Subscription Plan', onClick: () => navigate('subscription-plan') },
+        { key: 'user', icon: <FaRegUser size={18} />, label: 'User', onClick: () => navigate('user') },
         // { key: 'enquiry', icon: <MdMessage size={18} />, label: 'Enquiry', onClick: () => navigate('/admin/enquiry') },
         // { key: 'college', icon: <FaSchool size={18} />, label: 'College', onClick: () => navigate('/admin/college') },
         {
@@ -66,13 +67,12 @@ const AdminSidebar = ({ collapsed, settingData }) => {
             style={{ height: '100vh', position: 'sticky', top: 0, overflow: 'auto' }}
         >
             <div className="flex items-center justify-center py-4">
-                {/* <Avatar size={collapsed ? 40 : 64} src={`${BASE_URL}/${settingData.logo}`} className="transition-all duration-300" /> */}
-                <img src={`${BASE_URL}/${settingData.logo}`} alt="" />
+                <img
+                    src={settingData?.logo ? `${BASE_URL}/${settingData.logo}` : '/default-logo.png'}
+                    alt="Bill Book Logo"
+                />
                 {/* {!collapsed && <span className="ml-3 font-semibold text-2xl">{settingData.appName}</span>} */}
             </div>
-            {/* <div className="flex items-center justify-center py-4">
-                {!collapsed && <span className="ml-3 font-semibold text-2xl">IQEAA</span>}
-            </div> */}
             <Menu
                 mode="inline"
                 theme="light"

@@ -40,7 +40,7 @@ function Profile() {
                     <div className="flex flex-col items-center mb-8">
                         <Avatar
                             size={120}
-                            src={profileData.avatar}
+                            src={profileData?.avatar}
                             icon={<UserOutlined />}
                             className="mb-4"
                         />

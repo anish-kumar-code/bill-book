@@ -6,23 +6,23 @@ import { useNavigate } from 'react-router';
 import { updateUser } from '../../../../services/admin/apiUser';
 
 const StyledSection = ({ title, children, style = {} }) => (
-  <div style={{
-    padding: '16px',
-    background: '#fff',
-    borderRadius: '8px',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
-    marginBottom: '16px',
-    ...style
-  }}>
-    {title && <h4 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>{title}</h4>}
-    {children}
-  </div>
+    <div style={{
+        padding: '16px',
+        background: '#fff',
+        borderRadius: '8px',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+        marginBottom: '16px',
+        ...style
+    }}>
+        {title && <h4 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>{title}</h4>}
+        {children}
+    </div>
 );
 
 const InfoItem = ({ label, value }) => (
-  <p style={{ margin: '8px 0' }}>
-    <strong>{label}:</strong> {value || 'N/A'}
-  </p>
+    <p style={{ margin: '8px 0' }}>
+        <strong>{label}:</strong> {value || 'N/A'}
+    </p>
 );
 
 const UserTable = ({ searchText = "", data = [], loading, refreshData }) => {
@@ -63,7 +63,7 @@ const UserTable = ({ searchText = "", data = [], loading, refreshData }) => {
             key: 'profile',
             align: 'center',
             render: (_, record) => (
-                <Avatar size={40} src={record.profileImage || record.collegeLogo} icon={<FaUser />} />
+                <Avatar size={40} src={record?.profileImage || record?.collegeLogo} icon={<FaUser />} />
             )
         },
         {
@@ -118,9 +118,12 @@ const UserTable = ({ searchText = "", data = [], loading, refreshData }) => {
         key: item._id || index
     }));
 
-    const filteredData = dataWithSerialNumbers.filter((item) =>
-        item.mobileNo?.toLowerCase().includes(searchText.toLowerCase())
-    );
+    const filteredData = dataWithSerialNumbers.filter((item) => {
+        const mobileMatch = item.mobileNo?.toLowerCase().includes(searchText.toLowerCase());
+        const nameMatch = item.name?.toLowerCase().includes(searchText.toLowerCase());
+        return mobileMatch || nameMatch;
+    });
+
 
     return (
         <>
@@ -150,7 +153,7 @@ const UserTable = ({ searchText = "", data = [], loading, refreshData }) => {
                         <StyledSection style={{ display: 'flex', alignItems: 'center', justifyContent: "center", gap: '16px' }}>
                             {selectedRecord.profileImage && (
                                 <img
-                                    src={`${import.meta.env.VITE_BASE_URL}/${selectedRecord.profileImage.replace(/\\/g, '/')}`}
+                                    src={`${import.meta.env.VITE_BASE_URL}/${selectedRecord?.profileImage?.replace(/\\/g, '/')}`}
                                     alt="Profile"
                                     style={{
                                         width: '120px',

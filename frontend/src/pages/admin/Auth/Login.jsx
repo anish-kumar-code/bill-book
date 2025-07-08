@@ -34,12 +34,11 @@ function Login() {
 
     return (
         <>
-            <title>GoRabit | Admin Login</title>
             <div className="flex min-h-screen bg-gray-50">
                 {/* Left side - Logo */}
                 <div className="hidden lg:flex w-1/2 justify-center items-center bg-blue-50">
                     <img
-                        src="https://mistralaichatupprodswe.blob.core.windows.net/chat-images/d1/62/b8/d162b8d5-54d2-416c-96c9-0a07e8689b62/e575ef49-cf29-4c77-b2fa-763fe8dba399/3e0f7816-cb9f-41d5-a2b9-17b518bb47d6?sv=2025-01-05&st=2025-07-07T12%3A59%3A31Z&se=2025-07-07T13%3A59%3A31Z&sr=b&sp=rade&sig=X2obBYe1s6Sb0njLCRyhyMIvyupIdp%2BdWiB9qP5WGy0%3D"
+                        src="/logo.png"
                         alt="BillBook Logo"
                         className="w-3/4"
                     />

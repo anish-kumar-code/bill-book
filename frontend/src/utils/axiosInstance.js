@@ -15,7 +15,7 @@ axiosInstance.interceptors.request.use((config) => {
         if (adminToken) {
             config.headers.Authorization = `Bearer ${adminToken}`;
         }
-    } else if (config.url.includes("api/vendor")) {
+    } else if (config.url.includes("/api/vendor")) {
         if (vendorToken) {
             config.headers.Authorization = `Bearer ${vendorToken}`;
         }
