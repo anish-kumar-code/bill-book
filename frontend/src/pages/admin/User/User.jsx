@@ -1,7 +1,7 @@
 import { Input, message, Tabs } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getUser } from '../../../services/admin/apiList';
 import UserTable from './components/UserTable';
+import { getUser } from '../../../services/admin/apiUser';
 
 const { TabPane } = Tabs;
 

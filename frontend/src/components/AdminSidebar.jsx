@@ -36,11 +36,8 @@ const AdminSidebar = ({ collapsed, settingData }) => {
         { key: 'dashboard', icon: <LuLayoutDashboard size={18} />, label: 'Dashboard', onClick: () => navigate('/admin') },
         { key: 'subscription-plan', icon: <MdOutlineSubscriptions size={18} />, label: 'Subscription Plan', onClick: () => navigate('subscription-plan') },
         { key: 'user', icon: <FaRegUser size={18} />, label: 'User', onClick: () => navigate('user') },
-        // { key: 'enquiry', icon: <MdMessage size={18} />, label: 'Enquiry', onClick: () => navigate('/admin/enquiry') },
-        // { key: 'college', icon: <FaSchool size={18} />, label: 'College', onClick: () => navigate('/admin/college') },
         {
             key: 'settings', icon: <IoSettingsOutline size={18} />, label: 'Settings', children: [
-                // { key: 'settings-profile', label: 'Profile', onClick: () => navigate('/admin/settings/profile') },
                 { key: 'settings-charges', icon: <FaSitemap />, label: 'Site', onClick: () => navigate('/admin/settings/charges') },
                 {
                     key: 'user-cms', icon: <FaUserClock size={18} />, label: 'User CMS', children: [

@@ -1,6 +1,7 @@
-import { Avatar, Button, Modal, Table, Switch, message } from 'antd';
+import { Avatar, Button, Modal, Table, Switch, message, Tooltip } from 'antd';
 import { FaUser } from 'react-icons/fa';
 import { IoMdEye } from 'react-icons/io';
+import { SlDocs } from "react-icons/sl";
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { updateUser } from '../../../../services/admin/apiUser';
@@ -102,12 +103,10 @@ const UserTable = ({ searchText = "", data = [], loading, refreshData }) => {
             key: 'action',
             align: 'center',
             render: (_, record) => (
-                <Button
-                    type="primary"
-                    icon={<IoMdEye />}
-                    onClick={() => handleViewDetails(record)}
-                    style={{ display: 'flex', alignItems: 'center' }}
-                />
+                <div className='flex gap-2'>
+                    <Tooltip title="details"><Button type="primary" icon={<IoMdEye />} onClick={() => handleViewDetails(record)} style={{ display: 'flex', alignItems: 'center' }} /></Tooltip>
+                    <Tooltip title="services"><Button type="primary" icon={<SlDocs />} onClick={() => navigate(record._id)} style={{ display: 'flex', alignItems: 'center' }} /></Tooltip>
+                </div>
             )
         }
     ];
@@ -142,7 +141,7 @@ const UserTable = ({ searchText = "", data = [], loading, refreshData }) => {
                 onCancel={handleCloseModal}
                 width={800}
                 style={{ top: '20px' }}
-                bodyStyle={{
+                styles={{
                     padding: '24px',
                     background: '#f9fafb',
                     borderRadius: '8px',

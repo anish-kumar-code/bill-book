@@ -11,6 +11,7 @@ const { createCompany } = require('../controllers/user/company/createCompany');
 const { getCompany } = require('../controllers/user/company/getCompany');
 const { updateCompany } = require('../controllers/user/company/updateCompany');
 const { createQuotation } = require('../controllers/user/quotation/createQuotation');
+const { generateQuotationPDF } = require('../controllers/user/quotation/generateQuotationPDF');
 const { createSurvey } = require('../controllers/user/survey/createSurvey');
 const { createPacking } = require('../controllers/user/packing/createPacking');
 const { createLrbilty } = require('../controllers/user/lrbilty/createLrbilty');
@@ -36,6 +37,18 @@ const { getFovScf } = require('../controllers/user/fovScf/getFovScf');
 const { getNoc } = require('../controllers/user/noc/getNoc');
 const { showDeletePage } = require('../controllers/user/auth/showDeletePage');
 const { findUser } = require('../controllers/user/auth/findUser');
+const deleteQuotation = require('../controllers/user/quotation/deleteQuotation');
+const deleteSurvey = require('../controllers/user/survey/deleteSurvey');
+const deletePacking = require('../controllers/user/packing/deletePacking');
+const deleteLrbilty = require('../controllers/user/lrbilty/deleteLrbilty');
+const deleteProforma = require('../controllers/user/proforma/deleteProforma');
+const deleteBill = require('../controllers/user/bill/deleteBill');
+const deleteMoney = require('../controllers/user/money/deleteMoney');
+const deleteCarCondition = require('../controllers/user/carCondition/deleteCarCondition');
+const deletePaymentVoucher = require('../controllers/user/paymentVoucher/deletePaymentVoucher');
+const deleteTws = require('../controllers/user/tws/deleteTws');
+const deleteFovScf = require('../controllers/user/fovScf/deleteFovScf');
+const deleteNoc = require('../controllers/user/noc/deleteNoc');
 const { deleteUser } = require('../controllers/user/auth/deleteUser');
 
 const router = express.Router();
@@ -65,6 +78,8 @@ router.get('/home', userAuthenticate, getHomeData);
 //-----------------------------------------------
 router.get('/quotation', userAuthenticate, getQuotation);
 router.post('/quotation', userAuthenticate, createQuotation);
+router.delete('/quotation/:id', userAuthenticate, deleteQuotation);
+router.get('/quotation/:id/pdf', userAuthenticate, generateQuotationPDF);
 
 
 //------------------------------------------------
@@ -72,6 +87,7 @@ router.post('/quotation', userAuthenticate, createQuotation);
 //-----------------------------------------------
 router.get('/survey', userAuthenticate, getSurvey);
 router.post('/survey', userAuthenticate, createSurvey);
+router.delete('/survey/:id', userAuthenticate, deleteSurvey);
 
 
 //------------------------------------------------
@@ -79,6 +95,7 @@ router.post('/survey', userAuthenticate, createSurvey);
 //-----------------------------------------------
 router.get('/packing', userAuthenticate, getPacking);
 router.post('/packing', userAuthenticate, createPacking);
+router.delete('/packing/:id', userAuthenticate, deletePacking);
 
 
 //------------------------------------------------
@@ -86,6 +103,7 @@ router.post('/packing', userAuthenticate, createPacking);
 //-----------------------------------------------
 router.get('/lrbilty', userAuthenticate, getLrbilty);
 router.post('/lrbilty', userAuthenticate, createLrbilty);
+router.delete('/lrbilty/:id', userAuthenticate, deleteLrbilty);
 
 
 //------------------------------------------------
@@ -93,6 +111,7 @@ router.post('/lrbilty', userAuthenticate, createLrbilty);
 //-----------------------------------------------
 router.get('/proforma', userAuthenticate, getProforma);
 router.post('/proforma', userAuthenticate, createProforma);
+router.delete('/proforma/:id', userAuthenticate, deleteProforma);
 
 
 //------------------------------------------------
@@ -100,6 +119,7 @@ router.post('/proforma', userAuthenticate, createProforma);
 //-----------------------------------------------
 router.get('/bill', userAuthenticate, getBill);
 router.post('/bill', userAuthenticate, createBill);
+router.delete('/bill/:id', userAuthenticate, deleteBill);
 
 
 //-----------------------------------------------
@@ -107,6 +127,7 @@ router.post('/bill', userAuthenticate, createBill);
 //------------------------------------------------
 router.get('/money', userAuthenticate, getMoney);
 router.post('/money', userAuthenticate, createMoney);
+router.delete('/money/:id', userAuthenticate, deleteMoney);
 
 
 //------------------------------------------------
@@ -114,6 +135,7 @@ router.post('/money', userAuthenticate, createMoney);
 //-----------------------------------------------
 router.get('/carCondition', userAuthenticate, getCarCondition);
 router.post('/carCondition', userAuthenticate, createCarCondition);
+router.delete('/carCondition/:id', userAuthenticate, deleteCarCondition);
 
 
 //------------------------------------------------
@@ -121,6 +143,7 @@ router.post('/carCondition', userAuthenticate, createCarCondition);
 //-----------------------------------------------
 router.get('/paymentVoucher', userAuthenticate, getPaymentVoucher);
 router.post('/paymentVoucher', userAuthenticate, createPaymentVoucher);
+router.delete('/paymentVoucher/:id', userAuthenticate, deletePaymentVoucher);
 
 
 //------------------------------------------------
@@ -128,6 +151,7 @@ router.post('/paymentVoucher', userAuthenticate, createPaymentVoucher);
 //-----------------------------------------------
 router.get('/tws', userAuthenticate, getTws);
 router.post('/tws', userAuthenticate, createTws);
+router.delete('/tws/:id', userAuthenticate, deleteTws);
 
 
 //------------------------------------------------
@@ -135,6 +159,7 @@ router.post('/tws', userAuthenticate, createTws);
 //-----------------------------------------------
 router.get('/fovScf', userAuthenticate, getFovScf);
 router.post('/fovScf', userAuthenticate, createFovScf);
+router.delete('/fovScf/:id', userAuthenticate, deleteFovScf);
 
 
 //------------------------------------------------
@@ -142,7 +167,14 @@ router.post('/fovScf', userAuthenticate, createFovScf);
 //-----------------------------------------------
 router.get('/noc', userAuthenticate, getNoc);
 router.post('/noc', userAuthenticate, createNoc);
+router.delete('/noc/:id', userAuthenticate, deleteNoc);
 
+
+
+//------------------------------------------------
+// noc Data
+//-----------------------------------------------
+// router.delete('/doc/:id', userAuthenticate, deleteDoc)
 
 
 

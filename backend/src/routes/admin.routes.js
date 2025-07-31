@@ -22,6 +22,8 @@ const { getSubscriptionPlan } = require('../controllers/admin/subscriptionPlan/g
 const { updateSubscriptionPlan } = require('../controllers/admin/subscriptionPlan/updateSubscriptionPlan');
 const { deleteSubscriptionPlan } = require('../controllers/admin/subscriptionPlan/deleteSubscriptionPlan');
 const { getUser } = require('../controllers/admin/user/getUser');
+const { getServices } = require('../controllers/admin/services/getServices');
+const { getServicesCount } = require('../controllers/admin/services/getServicesCount');
 
 const router = express.Router();
 
@@ -56,6 +58,14 @@ router.get("/list", getList)
 //------------------------------------------------
 router.get("/user/list", getUser)
 router.patch("/user/:userId", updateUser)
+
+
+
+//------------------------------------------------
+// services
+//------------------------------------------------
+router.get("/service/count/:userId", getServicesCount)
+router.get("/service/list/:userId", getServices)
 
 
 

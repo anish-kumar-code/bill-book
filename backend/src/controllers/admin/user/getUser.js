@@ -37,9 +37,6 @@ exports.getUser = catchAsync(async (req, res) => {
 
         const users = await User.find(query)
 
-        console.log(type)
-        console.log(users)
-
         return res.status(200).json({
             status: true,
             message: "user data fetched successfully",

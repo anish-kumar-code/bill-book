@@ -18,6 +18,7 @@ import AboutUs from './pages/admin/Settings/components/AboutUs'
 import Cms from './pages/web/Cms/Cms'
 import User from './pages/admin/User/User'
 import SubscriptionPlan from './pages/admin/Subscription-plan/SubscriptionPlan'
+import ServicesTable from './pages/admin/User/components/ServicesTable'
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path='subscription-plan' element={<SubscriptionPlan />} />
           <Route path='user' element={<User />} />
+          <Route path='user/:userId' element={<ServicesTable />} />
           <Route path='settings' element={<Settings />} />
           {/* <Route path='settings/profile' element={<Profile />} /> */}
           <Route path='settings/charges' element={<Charges />} />
