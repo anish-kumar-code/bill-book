@@ -9,7 +9,7 @@ import { MdMessage, MdOutlineSubscriptions } from 'react-icons/md'
 import { FaRegUser, FaSchool, FaSitemap, FaUserClock } from 'react-icons/fa'
 import { FaArrowRightToBracket } from 'react-icons/fa6'
 import { useAuth } from '../context/AuthContext'
-import { IoSettingsOutline } from 'react-icons/io5'
+import { IoImagesOutline, IoSettingsOutline } from 'react-icons/io5'
 
 const AdminSidebar = ({ collapsed, settingData }) => {
     const navigate = useNavigate()
@@ -34,6 +34,7 @@ const AdminSidebar = ({ collapsed, settingData }) => {
     const menuItems = [
         { type: 'divider' },
         { key: 'dashboard', icon: <LuLayoutDashboard size={18} />, label: 'Dashboard', onClick: () => navigate('/admin') },
+        { key: 'banner', icon: <IoImagesOutline size={18} />, label: 'Banner', onClick: () => navigate('/admin/banner') },
         { key: 'subscription-plan', icon: <MdOutlineSubscriptions size={18} />, label: 'Subscription Plan', onClick: () => navigate('subscription-plan') },
         { key: 'user', icon: <FaRegUser size={18} />, label: 'User', onClick: () => navigate('user') },
         {

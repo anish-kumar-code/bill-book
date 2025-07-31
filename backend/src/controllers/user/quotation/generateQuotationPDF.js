@@ -1,4 +1,4 @@
-""// controllers/quotationController.js
+// controllers/quotationController.js
 const Quotation = require('../../../models/quotation');
 const Company = require('../../../models/company');
 const catchAsync = require('../../../utils/catchAsync');
@@ -40,7 +40,7 @@ function createQuotationPDF(quotationData, companyData) {
         const company = companyData;
         const form = quotationData.formData;
 
-        // Page 1 background header
+        // Page 1 header
         doc.rect(0, 0, doc.page.width, 100).fill('#000');
         doc.fillColor('#fff').fontSize(10).text(`Quotation No: ${form.quotationDetails.quotationNumber}`, 50, 40);
         doc.text(`Date: ${form.quotationDetails.qtdate}`, 450, 40, { align: 'right' });
@@ -48,7 +48,7 @@ function createQuotationPDF(quotationData, companyData) {
             doc.image(path.join(__dirname, '../../../../', company.logo), 250, 10, { width: 100 });
         }
 
-        // Title
+        // Title and greeting
         doc.moveDown(3);
         doc.fillColor('#000').fontSize(18).text('QUOTATION', { align: 'center' });
         doc.moveDown(0.5);
@@ -56,26 +56,42 @@ function createQuotationPDF(quotationData, companyData) {
         doc.text('Thank you for your inquiry. Please find our quotation below.');
         doc.moveDown();
 
-        // Details Table (3x2)
+        // Detail Table
         const detailTableTop = doc.y;
         drawTable(doc, [
             ['Name', form.quotationDetails.partyname, 'Company Name', form.quotationDetails.companyName],
-            ['Mobile No', form.quotationDetails.mobileNo, 'Email', form.quotationDetails.email],
+            ['Mobile No', form.quotationDetails.mobileNo || '', 'Email', form.quotationDetails.email],
             ['Vehicle Type', form.quotationDetails.movingType, 'Shifting Date', form.quotationDetails.shiptdate],
         ], detailTableTop);
 
-        // Particular Section
+        // Particulars section
         doc.moveDown(2);
         doc.font('Helvetica-Bold').fontSize(12).text('PARTICULAR (Packing and Shifting)', { align: 'center' });
 
         const serviceTableTop = doc.y + 10;
-        const items = form.packingAndShifting || [];
-        const rows = [['Particular', 'Amount'], ...items.map(p => [p.item, `₹${p.amount}`])];
-        drawSimpleTable(doc, rows, serviceTableTop);
+        const serviceCharges = form.paymentDetails || {};
+        const items = [
+            ['Packing Charges', `₹${serviceCharges.pakingcharge || 0}`],
+            ['Unpacking Charges', `₹${serviceCharges.unpakingcharge || 0}`],
+            ['Loading Charges', `₹${serviceCharges.lodingcharge || 0}`],
+            ['Unloading Charges', `₹${serviceCharges.unloadingcharge || 0}`],
+            ['Packing Material Charges', `₹${serviceCharges.packingmaterialcharge || 0}`],
+            ['Storage Charges', `₹${serviceCharges.storgecharge || 0}`],
+            ['Car/Bike Transport', `₹${serviceCharges.carbiketpt || 0}`],
+            ['Miscellaneous Charges', `₹${serviceCharges.miscellaneouscharge || 0}`],
+            ['Other Charges', `₹${serviceCharges.othercharge || 0}`],
+            ['ST Charge', `₹${serviceCharges.stcharge || 0}`],
+            ['Octroi/Green Tax', `₹${serviceCharges.octriogreentax || 0}`],
+            ['Surcharge', `${serviceCharges.surcharge || ''}`],
+            ['Discount', `${serviceCharges.discount || ''}`],
+            ['GST Type', `${serviceCharges.gsttype || ''}`],
+            ['GST Percent', `${serviceCharges.gstPercent || ''}%`],
+        ];
+        drawSimpleTable(doc, [['Particular', 'Amount'], ...items], serviceTableTop);
 
         doc.moveDown();
-        if (form.otherDetails?.remarks) {
-            doc.font('Helvetica').fontSize(10).text(`Remark: ${form.otherDetails.remarks}`);
+        if (form.paymentDetails?.remark) {
+            doc.font('Helvetica').fontSize(10).text(`Remark: ${form.paymentDetails.remark}`);
         }
 
         // Footer Signatures
@@ -98,7 +114,7 @@ function createQuotationPDF(quotationData, companyData) {
             .text(`Mobile: ${company.contactNumber1}`)
             .text(`Email: ${company.email}`)
             .text(`Website: ${company.website}`)
-            .text(`GST: ${company.gst}`)
+            .text(`GST: ${company.gstNo}`)
             .text(`PAN: ${company.pan}`)
             .moveDown()
             .fontSize(8).text('This is a computer-generated document, signature is not required.');

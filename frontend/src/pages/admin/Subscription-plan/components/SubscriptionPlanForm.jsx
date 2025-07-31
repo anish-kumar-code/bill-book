@@ -50,7 +50,7 @@ const SubscriptionPlanForm = ({ form, onFinish, loading }) => {
                             min={0}
                             placeholder="Enter price"
                             style={{ width: '100%' }}
-                            formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            formatter={(value) => `₹ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                             parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
                         />
                     </Form.Item>

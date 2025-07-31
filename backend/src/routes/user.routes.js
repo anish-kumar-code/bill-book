@@ -50,6 +50,9 @@ const deleteTws = require('../controllers/user/tws/deleteTws');
 const deleteFovScf = require('../controllers/user/fovScf/deleteFovScf');
 const deleteNoc = require('../controllers/user/noc/deleteNoc');
 const { deleteUser } = require('../controllers/user/auth/deleteUser');
+const { getSubscription } = require('../controllers/user/subscription/getSubscription');
+const { takeSubscription } = require('../controllers/user/subscription/takeSubscription');
+const { getSubscriptionHistory } = require('../controllers/user/subscription/getSubscriptionHistory');
 
 const router = express.Router();
 
@@ -71,6 +74,7 @@ router.patch('/profile', userAuthenticate, fileUploader("user", [{ name: "image"
 // home Data
 //------------------------------------------------
 router.get('/home', userAuthenticate, getHomeData);
+
 
 
 //------------------------------------------------
@@ -185,6 +189,14 @@ router.get('/company', userAuthenticate, getCompany);
 router.post('/company', userAuthenticate, fileUploader("company", [{ name: "logo", maxCount: 1 }, { name: "sign", maxCount: 1 }]), createCompany);
 router.patch('/company', userAuthenticate, fileUploader("company", [{ name: "logo", maxCount: 1 }, { name: "sign", maxCount: 1 }]), updateCompany);
 
+
+
+//------------------------------------------------
+// subscription plan
+//------------------------------------------------
+router.post('/take/subscription', userAuthenticate, takeSubscription)
+router.get('/subscription', userAuthenticate, getSubscription)
+router.get('/history/subscription', userAuthenticate, getSubscriptionHistory)
 
 
 

@@ -19,6 +19,7 @@ import Cms from './pages/web/Cms/Cms'
 import User from './pages/admin/User/User'
 import SubscriptionPlan from './pages/admin/Subscription-plan/SubscriptionPlan'
 import ServicesTable from './pages/admin/User/components/ServicesTable'
+import Banner from './pages/admin/Banner/Banner'
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
         <Route path='/admin/login' element={<Login />} />
         <Route path='/admin' element={<AdminPrivateRoute> <AdminLayout /> </AdminPrivateRoute>}>
           <Route index element={<Dashboard />} />
+          <Route path='banner' element={<Banner />} />
           <Route path='subscription-plan' element={<SubscriptionPlan />} />
           <Route path='user' element={<User />} />
           <Route path='user/:userId' element={<ServicesTable />} />

@@ -6,7 +6,7 @@ const SubscriptionPlanTable = ({ data, loading, onUpdateStatus, onEdit, onDelete
     const columns = [
         { title: 'Name', dataIndex: 'name', key: 'name' },
         { title: 'Duration (Days)', dataIndex: 'duration_days', key: 'duration_days' },
-        { title: 'Price', dataIndex: 'price', key: 'price', render: (price) => `$${price.toFixed(2)}` },
+        { title: 'Price', dataIndex: 'price', key: 'price', render: (price) => `₹${price.toFixed(2)}` },
         // { title: 'Admin Count', dataIndex: 'adminAccount', key: 'adminAccount' },
         { title: 'Staff Count', dataIndex: 'staffAccount', key: 'staffAccount' },
         {
