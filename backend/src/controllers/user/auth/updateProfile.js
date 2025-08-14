@@ -23,7 +23,10 @@ exports.updateProfile = async (req, res) => {
             }
         });
 
-        user.isNewUser = false;
+        if (user.name && user.email && user.company) {
+            user.isNewUser = false;
+        }
+
 
         await user.save();
 
