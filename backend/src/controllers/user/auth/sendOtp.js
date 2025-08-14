@@ -1,4 +1,5 @@
 const User = require("../../../models/user");
+const AppError = require("../../../utils/AppError");
 
 
 // Generate a 6-digit OTP
@@ -7,12 +8,17 @@ const generateOTP = () => {
 };
 
 // Send OTP to mobile number
-exports.sendOtp = async (req, res) => {
+exports.sendOtp = async (req, res, next) => {
     try {
         const { mobileNo } = req.body;
 
         if (!mobileNo) {
             return res.status(400).json({ success: false, message: 'Mobile number is required' });
+        }
+
+        const existingEmployee = await User.findOne({ mobileNo });
+        if (!existingEmployee) {
+            return next(new AppError("You are not registred as employee", 404));
         }
 
         // Generate OTP
