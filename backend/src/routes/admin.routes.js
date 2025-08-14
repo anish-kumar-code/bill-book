@@ -1,14 +1,11 @@
 const express = require('express');
 const fileUploader = require('../middlewares/fileUploader');
-// auth
+const { getCms } = require('../controllers/admin/cms/getCms');
+const { addCms } = require('../controllers/admin/cms/addCms');
+const { updateCms } = require('../controllers/admin/cms/updateCms');
 const { signup } = require('../controllers/admin/auth/signup');
 const { login } = require('../controllers/admin/auth/login');
 const { adminAuthenticate } = require('../controllers/admin/auth/adminAuthenticate');
-// banner
-const { createBanner } = require('../controllers/admin/banner/createBanner');
-const { getAllBanners } = require('../controllers/admin/banner/getBanner');
-const { deleteBanner } = require('../controllers/admin/banner/deleteBanner');
-// settings
 const { createSetting } = require('../controllers/admin/setting/createSetting');
 const { getSetting } = require('../controllers/admin/setting/getSetting');
 const { updateSetting } = require('../controllers/admin/setting/updateSetting');
@@ -39,14 +36,84 @@ router.get("/test", (req, res) => {
 router.post('/signup', signup)
 router.post('/login', login)
 
+
+//------------------------------------------------
+// auth
+//------------------------------------------------
+router.get("/dashboard", getDashboard)
+
+//------------------------------------------------
+// Enquiry
+//------------------------------------------------
+router.get("/enquiry", getEnquiry)
+
+
+
+//------------------------------------------------
+// College
+//------------------------------------------------
+router.post("/college/createId", createCollegeId)
+router.post("/college/create", fileUploader("college",
+    [
+        { name: "collegeLogo", maxCount: 1 }, { name: "directorImage", maxCount: 1 },
+        { name: "aboutImage", maxCount: 1 }, { name: "registrationImage", maxCount: 1 }, { name: "certificateOfIncorporation", maxCount: 1 },
+        { name: "otherDocuments", maxCount: 1 }
+    ]), createCollege);
+
+router.patch("/college/:collegeId",
+    fileUploader("college",
+        [
+            { name: "collegeLogo", maxCount: 1 }, { name: "directorImage", maxCount: 1 },
+            { name: "aboutImage", maxCount: 1 }, { name: "registrationImage", maxCount: 1 }, { name: "certificateOfIncorporation", maxCount: 1 },
+            { name: "otherDocuments", maxCount: 1 }
+        ]),
+    updateCollege
+)
+router.get("/college", getCollege)
+router.get("/college/:id", getCollegeDetails)
+
+
+
+//------------------------------------------------
+// Event
+//------------------------------------------------
+router.post("/event", createEvent)
+router.get("/event", getAllEvents);
+router.get("/event/:id", getEventById)
+router.patch("/event/:id", updateEvent)
+router.delete("/event/:id", deleteEvent)
+
+
+
+//------------------------------------------------
+// Ticket
+//------------------------------------------------
+router.get("/ticket", getAllTickets);
+router.patch("/ticket/:ticketId", updateTicket);
+router.delete("/ticket/:ticketId", deleteTicket);
+
+
+
+//------------------------------------------------
+// Employee
+//------------------------------------------------
+router.post("/employee", createEmployee)
+router.get("/employee", getAllEmployees);
+router.get("/employee/:id", getEmployeeById)
+router.patch("/employee/:id", updateEmployee)
+router.delete("/employee/:id", deleteEmployee)
+
+
+
+
+
+
 //------------------------------------------------
 // cms
 //------------------------------------------------
 router.get("/cms", adminAuthenticate, getCms)
 router.post("/cms", adminAuthenticate, addCms)
 router.patch("/cms/:id", adminAuthenticate, updateCms)
-
-
 
 //------------------------------------------------
 // setting
